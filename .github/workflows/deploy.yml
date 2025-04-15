@@ -21,10 +21,10 @@ jobs:
         server: ${{ secrets.BEGET_FTP_SERVER }}
         username: ${{ secrets.BEGET_FTP_USERNAME }}
         password: ${{ secrets.BEGET_FTP_PASSWORD }}
-        protocol: ftp # Явно указываем FTP
+        protocol: ftps # Явно указываем FTPS
         port: 21     # Стандартный порт для FTP
         local-dir: ./ # Загружаем корень репозитория (измените, если нужно)
-        remote-dir: ${{ secrets.BEGET_REMOTE_PATH }} # Путь на сервере Beget из секрета
+        server-dir: ${{ secrets.BEGET_REMOTE_PATH }} # Путь на сервере Beget из секрета
         exclude: |   # Исключаем ненужные файлы/папки
           **/.git*
           **/.git*/**
