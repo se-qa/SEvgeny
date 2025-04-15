@@ -158,7 +158,7 @@
             font-weight: bold;
             position: absolute;
             left: 0;
-            top: 1px; /* Подстроим позицию маркера */
+            top: -4px; /* Подстроим позицию маркера */
             font-size: 1.2em; /* Чуть крупнее маркер */
         }
 
@@ -178,7 +178,11 @@
              color: #555;
              font-weight: bold;
              font-size: 1em; /* Обычный размер для вложенного маркера */
-             top: 2px;
+             top: 1px;
+        }
+
+        ul ul li.note::before {
+            content: none;
         }
 
         strong {
