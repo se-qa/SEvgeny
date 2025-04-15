@@ -13,278 +13,18 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Favicon Link (замените href на путь к вашему файлу) -->
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicon Link (укажите правильный путь, если он не в корне) -->
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <style>
-        /* --- Общие Стили и Шрифты --- */
-        body {
-            font-family: 'Nunito Sans', sans-serif; /* Основной шрифт */
-            font-weight: 300; /* Легкое начертание для основного текста */
-            line-height: 1.7; /* Немного увеличим межстрочный интервал для читаемости */
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        /* --- Шрифты для Заголовков --- */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Merriweather', serif; /* Шрифт для заголовков */
-            font-weight: 700; /* Полужирное начертание для заголовков */
-            color: #2c3e50; /* Цвет заголовков */
-            margin-top: 1.5em; /* Отступ сверху */
-            margin-bottom: 0.7em; /* Отступ снизу */
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            background-color: #fff;
-            padding: 40px; /* Увеличим внутренние отступы */
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Немного изменим тень */
-            border-radius: 8px;
-        }
-
-        /* --- Header --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 25px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .header-left h1 {
-            margin: 0 0 5px 0;
-            font-size: 2.5em;
-            line-height: 1.1;
-        }
-
-        .header-left h2 {
-            margin: 0;
-            font-weight: 400; /* Обычное начертание Merriweather для подзаголовка */
-            color: #3498db;
-            font-size: 1.5em;
-        }
-
-        .contact-info {
-            text-align: right;
-            font-size: 0.95em;
-            min-width: 250px;
-            font-weight: 400; /* Немного увеличим вес для контактов */
-        }
-
-        .contact-info p {
-            margin: 6px 0;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-         .contact-info p i {
-            margin-right: 10px; /* Немного увеличим отступ иконки */
-            color: #3498db;
-            width: 20px;
-            text-align: center;
-            font-size: 1.1em; /* Сделаем иконки чуть крупнее */
-        }
-
-        .contact-info a {
-            color: #3498db;
-            text-decoration: none;
-            transition: color 0.3s ease; /* Плавный переход цвета для ссылок */
-        }
-
-        .contact-info a:hover {
-            color: #2980b9; /* Затемнение при наведении */
-            text-decoration: underline;
-        }
-
-        /* --- Секции --- */
-        section {
-            margin-bottom: 35px;
-        }
-
-        section h2 {
-            font-size: 1.8em; /* Немного увеличим заголовки секций */
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-            display: flex; /* Для выравнивания иконки и текста */
-            align-items: center;
-        }
-
-         section h2 i {
-             margin-right: 12px; /* Отступ для иконки в заголовке секции */
-             color: #3498db;
-             font-size: 0.9em; /* Размер иконки относительно заголовка */
-         }
-
-        section h3 {
-            font-size: 1.4em;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        section h4 {
-             font-size: 1.15em;
-             color: #555;
-             margin-top: 20px;
-             margin-bottom: 10px;
-             font-style: normal; /* Убираем курсив по умолчанию, делаем жирным */
-             font-weight: 700;
-             font-family: 'Nunito Sans', sans-serif; /* Заголовки достижений - другим шрифтом */
-        }
-
-        /* --- Списки --- */
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            margin-bottom: 10px; /* Немного увеличим отступ */
-            padding-left: 25px;
-            position: relative;
-            font-weight: 400; /* Обычное начертание для пунктов списка */
-        }
-
-        ul li::before {
-            content: '•';
-            color: #3498db;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: -4px; /* Подстроим позицию маркера */
-            font-size: 1.2em; /* Чуть крупнее маркер */
-        }
-
-        ul ul {
-           padding-left: 30px; /* Увеличим отступ вложенных списков */
-           margin-top: 8px;
-           margin-bottom: 12px;
-        }
-
-        ul ul li {
-             font-weight: 300; /* Вложенные списки снова легкие */
-             margin-bottom: 6px;
-        }
-
-        ul ul li::before {
-             content: '◦';
-             color: #555;
-             font-weight: bold;
-             font-size: 1em; /* Обычный размер для вложенного маркера */
-             top: 1px;
-        }
-
-        ul ul li.note::before {
-            content: none;
-        }
-
-        strong {
-            font-weight: 700; /* Используем самое жирное начертание Nunito Sans для strong */
-            color: #2c3e50; /* Темнее для выделения */
-        }
-
-        /* --- Опыт Работы и Образование --- */
-        .job, .education-entry {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee; /* Сделаем разделитель светлее */
-        }
-        .job:last-child, .education-entry:last-child {
-             border-bottom: none;
-             padding-bottom: 0;
-             margin-bottom: 0;
-        }
-
-        .job-header {
-            margin-bottom: 5px; /* Уменьшим отступ под заголовком работы */
-        }
-
-        .job-title {
-            font-size: 1.15em; /* Немного увеличим */
-            font-weight: 700; /* Используем Merriweather 700 */
-            color: #3498db;
-            display: block; /* Чтобы заголовок был на своей строке */
-             margin-bottom: 2px;
-        }
-
-        .company-name {
-            font-family: 'Nunito Sans', sans-serif; /* Название компании - обычным шрифтом */
-            font-style: normal;
-            font-weight: 400;
-            color: #555;
-            font-size: 1em;
-        }
-
-        .job-dates {
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 0.9em;
-            color: #777;
-            margin-bottom: 15px; /* Увеличим отступ под датами */
-            font-weight: 400;
-        }
-
-        .projects {
-            font-size: 0.95em;
-            color: #555;
-            margin-top: 15px;
-            padding-left: 20px;
-            border-left: 3px solid #eee;
-            font-weight: 400; /* Проекты - обычным весом */
-        }
-         .projects strong {
-             color: #333; /* Выделение в проектах */
-             font-weight: 700;
-         }
-
-        .note {
-            font-style: italic;
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 5px;
-            font-weight: 400; /* Заметки тоже обычным весом */
-        }
-
-        /* --- Адаптивность --- */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .contact-info {
-                text-align: left;
-                margin-top: 20px;
-                width: 100%; /* Занять всю ширину на мобильных */
-            }
-             .contact-info p {
-                 justify-content: flex-start;
-             }
-             section h2 {
-                 font-size: 1.6em;
-             }
-             .header-left h1 {
-                 font-size: 2em;
-             }
-             .header-left h2 {
-                 font-size: 1.3em;
-             }
-        }
-
-    </style>
 </head>
 <body>
 
     <div class="container">
-        <header>
+        <!-- Добавляем класс animate-on-scroll к header -->
+        <header class="animate-on-scroll">
             <div class="header-left">
                 <h1>Шитов Евгений1</h1>
                 <h2>QA Engineer</h2>
@@ -298,7 +38,8 @@
             </div>
         </header>
 
-        <section id="summary">
+        <!-- Добавляем класс animate-on-scroll к секции -->
+        <section id="summary" class="animate-on-scroll">
             <h2><i class="fas fa-user-circle"></i> Краткая информация</h2>
             <p>
                 QA Engineer c 8-летним опытом ручного тестирования Web и Desktop приложений. Экспертиза
@@ -310,7 +51,8 @@
             </p>
         </section>
 
-        <section id="skills">
+        <!-- Добавляем класс animate-on-scroll к секции -->
+        <section id="skills" class="animate-on-scroll">
             <h2><i class="fas fa-cogs"></i> Навыки</h2>
             <ul>
                 <li>
@@ -344,7 +86,7 @@
                         <li><strong>Фреймворки/Библиотеки:</strong> Pytest, Requests, Selenium, Playwright</li>
                         <li><strong>Типы:</strong> АРІ-тестирование, UI-тестирование</li>
                         <li><strong>Отчетность:</strong> Allure Report</li>
-                        <li style="list-style: none; padding-left: 0; font-weight: 300;" class="note"><em>(Примечание: Навыки получены в ходе обучения и самостоятельной практики)</em></li>
+                        <li class="note"><em>(Примечание: Навыки получены в ходе обучения и самостоятельной практики)</em></li>
                     </ul>
                 </li>
                  <li>
@@ -364,10 +106,12 @@
             </ul>
         </section>
 
-        <section id="experience">
+        <!-- Добавляем класс animate-on-scroll к секции -->
+        <section id="experience" class="animate-on-scroll">
             <h2><i class="fas fa-briefcase"></i> Опыт работы</h2>
 
-            <article class="job">
+            <!-- Добавляем класс animate-on-scroll к статье (блоку опыта) -->
+            <article class="job animate-on-scroll">
                  <div class="job-header">
                      <span class="job-title">QA Engineer</span>
                      <span class="company-name">ПАО "Сибур Холдинг"</span>
@@ -390,7 +134,8 @@
                  </ul>
             </article>
 
-            <article class="job">
+            <!-- Добавляем класс animate-on-scroll к статье (блоку опыта) -->
+            <article class="job animate-on-scroll">
                 <div class="job-header">
                     <span class="job-title">Manual QA Engineer</span>
                      <span class="company-name">OOO "CrackerJacks" (Услуги по тестированию ПО)</span>
@@ -422,12 +167,13 @@
 
         </section>
 
-        <section id="education">
+        <!-- Добавляем класс animate-on-scroll к секции -->
+        <section id="education" class="animate-on-scroll">
             <h2><i class="fas fa-graduation-cap"></i> Образование</h2>
             <div class="education-entry">
                 <h3>Саратовский Государственный Технический Университет имени Гагарина Ю.А.</h3>
                 <p class="job-dates">2007 - 2013</p>
-                <p style="font-weight: 400;"> <!-- Сделаем текст описания образования чуть жирнее -->
+                <p style="font-weight: 400;">
                    <strong>Факультет:</strong> Электронной техники и приборостроения<br>
                    <strong>Специальность:</strong> Приборостроение<br>
                    <strong>Квалификация:</strong> Специалист
@@ -435,7 +181,8 @@
             </div>
         </section>
 
-        <section id="courses">
+        <!-- Добавляем класс animate-on-scroll к секции -->
+        <section id="courses" class="animate-on-scroll">
             <h2><i class="fas fa-certificate"></i> Курсы и Сертификации</h2>
             <ul>
                 <li>Курс "Автоматизация тестирования на Python" (ООО “ОкуликБай”, 2024)</li>
@@ -445,12 +192,15 @@
 
         <!-- Optional Footer -->
         <!--
-        <footer>
+        <footer class="animate-on-scroll">
             <p style="text-align: center; font-size: 0.8em; color: #888; font-family: 'Nunito Sans', sans-serif; font-weight: 300;">Резюме сгенерировано: [Текущая дата]</p>
         </footer>
         -->
 
     </div> <!-- end .container -->
+
+    <!-- Link to JavaScript file (перед закрывающим body) -->
+    <script src="js/script.js" defer></script>
 
 </body>
 </html>
