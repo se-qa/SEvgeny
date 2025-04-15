@@ -1,0 +1,34 @@
+name: Deploy to Beget Hosting via FTP
+
+on:
+  push:
+    branches:
+      - main  # Или 'master'
+
+jobs:
+  deploy:
+    name: Deploy Files via FTP
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: FTP Deploy Action
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        # Используем секреты
+        server: ${{ secrets.BEGET_FTP_SERVER }}
+        username: ${{ secrets.BEGET_FTP_USERNAME }}
+        password: ${{ secrets.BEGET_FTP_PASSWORD }}
+        protocol: ftp # Явно указываем FTP
+        port: 21     # Стандартный порт для FTP
+        local-dir: ./ # Загружаем корень репозитория (измените, если нужно)
+        remote-dir: ${{ secrets.BEGET_REMOTE_PATH }} # Путь на сервере Beget из секрета
+        exclude: |   # Исключаем ненужные файлы/папки
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          .github/**
+          README.md
+        # dangerous-clean-slate: false # Оставьте false, если не уверены
