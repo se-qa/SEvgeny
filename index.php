@@ -214,7 +214,7 @@
         <header>
             <div class="header-left">
                 <h1>Шитов Евгений</h1>
-                <h2>QA Engineer Test</h2>
+                <h2>QA Engineer</h2>
             </div>
             <div class="contact-info">
                 <p><i class="fas fa-phone"></i> <a href="tel:+79649998607">+7 964 999 8607</a></p>
