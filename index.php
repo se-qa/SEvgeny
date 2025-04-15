@@ -286,7 +286,7 @@
     <div class="container">
         <header>
             <div class="header-left">
-                <h1>Шитов Евгений</h1>
+                <h1>Шитов Евгений1</h1>
                 <h2>QA Engineer</h2>
             </div>
             <div class="contact-info">
