@@ -37,8 +37,5 @@ jobs:
       - name: Validate HTML files
         uses: technote-space/html-validate-action@v2
         with:
-          # Опционально: Укажите конкретные пути или файлы, если нужно
-          # TARGETS: 'public_html/**/*.html'
-          # Опционально: Игнорируйте определенные файлы/папки
-          # IGNORE: '.git, node_modules, vendor' # Добавьте пути для игнорирования
-          # По умолчанию Action ищет .html во всем репозитории
+          TARGETS: '**/*.html' # Отступ в 2 пробела
+          IGNORE: '.git'      # Отступ в 2 пробела
