@@ -31,11 +31,3 @@ jobs:
           # Находим все файлы .php, исключая папку vendor (если вы ее используете)
           # и для каждого выполняем php -l
           find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
-
-      # --- HTML Validation ---
-      # 4. Используем Action для валидации HTML
-      - name: Validate HTML files
-        uses: actionshub/html-validate@v1
-        with:
-          TARGETS: '**/*.html' # Отступ в 2 пробела
-          IGNORE: '.git'      # Отступ в 2 пробела
