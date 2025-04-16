@@ -26,7 +26,7 @@
         <!-- Добавляем класс animate-on-scroll к header -->
         <header class="animate-on-scroll">
             <div class="header-left">
-                <h1>Шитов Евгений</h1>
+                <h1>Шитов Евгений!!!</h1>
                 <h2>QA Engineer</h2>
             </div>
             <div class="contact-info">
