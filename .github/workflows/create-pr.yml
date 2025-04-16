@@ -12,11 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main'
 
-    # ---> ДОБАВЬТЕ ЭТОТ БЛОК <---
+    # Права для checkout все еще нужны
     permissions:
-      contents: read       # Нужно для checkout
-      pull-requests: write # Нужно для gh pr create
-    # ---> КОНЕЦ БЛОКА <---
+      contents: read
+      # pull-requests: write больше не нужно указывать здесь, так как PAT имеет свои права
 
     steps:
       - name: Checkout code
@@ -24,24 +23,41 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create Pull Request using GitHub CLI
+      - name: Create Pull Request using GitHub CLI with PAT
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Используем наш секрет с PAT вместо GITHUB_TOKEN
+          GH_TOKEN: ${{ secrets.MY_PAT }}
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
+          set -x 
+
           echo "Checking for existing PR for branch: $BRANCH_NAME"
-          gh pr list --head "$BRANCH_NAME" --base "main" --state "open" --json "number" -q ". | length" > pr_count.txt
+          # Используем gh pr list для проверки
+          # Обратите внимание: используем GH_TOKEN в env, gh cli его подхватит
+          gh pr list --head "$BRANCH_NAME" --base "main" --state "open" --json "number" --jq ". | length" > pr_count.txt
+          cat pr_count.txt
           COUNT=$(cat pr_count.txt)
+          echo "Found $COUNT existing PRs for this branch."
 
           if [ "$COUNT" -eq "0" ]; then
-            echo "No existing PR found. Creating a new PR..."
+            echo "No existing PR found. Attempting to create a new PR..."
+            # Пытаемся создать PR, используя токен из env GH_TOKEN
             gh pr create \
               --base "main" \
               --head "$BRANCH_NAME" \
               --title "Merge changes from $BRANCH_NAME into main" \
-              --body "Automated PR created for branch \`$BRANCH_NAME\`. Please review and merge." \
-              || echo "Could not create PR. Maybe no changes or PR already exists?"
-            echo "PR creation process finished."
+              --body "Automated PR created for branch \`$BRANCH_NAME\`. Please review and merge."
+              # Метку мы убрали ранее
+          
+            EXIT_CODE=$? 
+            echo "gh pr create command finished with exit code: $EXIT_CODE"
+
+            if [ "$EXIT_CODE" -ne "0" ]; then
+                 echo "Could not create PR. Exit code $EXIT_CODE. Maybe no changes between branches or another issue occurred?"
+            else
+                 echo "PR creation process likely successful."
+            fi
           else
-            echo "PR already exists for branch $BRANCH_NAME. Skipping creation."
+            echo "PR already exists for branch $BRANCH_NAME or check failed. Skipping creation."
           fi
+          set +x

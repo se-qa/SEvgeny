@@ -35,7 +35,7 @@ jobs:
       # --- HTML Validation ---
       # 4. Используем Action для валидации HTML
       - name: Validate HTML files
-        uses: html-validate/action-html-validate@v1
+        uses: actionshub/html-validate@v1
         with:
           TARGETS: '**/*.html' # Отступ в 2 пробела
           IGNORE: '.git'      # Отступ в 2 пробела
