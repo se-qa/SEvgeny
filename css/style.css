@@ -53,23 +53,42 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Header --- */
 header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    /* Убираем стили карточки, если случайно добавили */
-    background-color: #fff; /* Возвращаем белый фон header */
-    padding: 25px 30px; /* Возвращаем паддинги header */
+    /* justify-content: space-between; Убираем, т.к. фото слева */
+    align-items: center; /* <<< ИЗМЕНЕНО: Выравниваем все элементы по центру вертикали */
+    background-color: #fff;
+    padding: 25px 30px;
     border-bottom: 2px solid #e0e0e0;
-    margin-bottom: 25px; /* Отступ после header */
-    border-radius: 8px; /* Скругление для header */
-     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); /* Тень для header */
-     /* Добавляем transition и hover для header */
-     transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    flex-wrap: wrap; /* Оставляем для мобильных */
 }
 header:hover {
      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
      transform: translateY(-4px);
-     border-color: #dcdcdc; /* Хотя нижней границы нет, оставляем для консистентности */
+     border-color: #dcdcdc;
 }
+
+/* === НАЧАЛО: Стили для Фото в Header === */
+.header-photo {
+    width: 200px; /* Ширина фото */
+    height: 200px; /* Высота фото */
+    border-radius: 50%; /* Делаем круглым */
+    overflow: hidden; /* Обрезаем изображение по кругу */
+    margin-right: 30px; /* Отступ справа от фото до текста */
+    border: 3px solid #e0e0e0; /* Светлая рамка */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Легкая тень */
+    flex-shrink: 0; /* Запрещаем фото сжиматься */
+}
+
+.header-photo img {
+    display: block; /* Убираем лишний отступ под картинкой */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Масштабируем фото, чтобы заполнить контейнер, сохраняя пропорции */
+}
+/* === КОНЕЦ: Стили для Фото в Header === */
 
 /* ... (стили для header остаются без изменений) ... */
 .header-left h1 {
@@ -402,34 +421,39 @@ strong {
     }
 
     header {
-        flex-direction: column;
-        align-items: center; /* Выравниваем по центру */
-        padding: 20px; /* Уменьшаем паддинги header */
-        margin-bottom: 20px; /* Уменьшаем отступ после header */
+        flex-direction: column; /* Элементы друг под другом */
+        align-items: center; /* Все по центру */
+        padding: 20px;
     }
-    /* Добавляем стили для фото на мобильных, если оно будет */
-    /* .header-photo { ... } */
+
+    /* Стили для фото на мобильных */
+    .header-photo {
+        width: 80px; /* Уменьшаем размер фото */
+        height: 80px;
+        margin-right: 0; /* Убираем правый отступ */
+        margin-bottom: 15px; /* Добавляем отступ снизу */
+        /* order: -1; */ /* Можно использовать, чтобы фото было первым, если нужно */
+    }
 
     .header-left {
         text-align: center; /* Выравниваем текст по центру */
-        width: 100%;
+        margin-bottom: 15px; /* Добавляем отступ под именем/должностью */
     }
 
     .contact-info {
-        margin-left: 0; /* Убираем прижатие вправо на мобильных */
-        width: 100%; /* Занимает всю ширину */
-        /* text-align: center; Мы это убрали, возможно нужно вернуть для p */
+        text-align: center; /* Контакты тоже по центру */
+        margin-left: 0; /* Убираем прижатие вправо */
+        width: 100%;
     }
 
-    .contact-info p {
-         /* Можно оставить grid или переключить на flex */
-         grid-template-columns: 20px auto; /* Текст займет автоширину */
-         justify-content: center; /* Центрируем строку на мобильных */
-         width: auto; /* Убираем max-content */
-         display: inline-grid; /* Чтобы строка не растягивалась на всю ширину */
-         margin-left: auto; /* Центрируем */
-         margin-right: auto; /* Центрируем */
-    }
+     .contact-info p {
+         justify-content: center; /* Центрируем строки контактов */
+         /* display: inline-grid; Убираем, если было */
+         display: grid; /* Оставляем Grid, если нравится */
+         /* Или возвращаем flex: */
+         /* display: flex; */
+         /* justify-content: center; */
+     }
 
     section h2 {
         font-size: 1.6em;
