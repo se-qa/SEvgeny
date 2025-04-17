@@ -136,7 +136,6 @@
                         <li><strong>Фреймворки/Библиотеки:</strong> Pytest, Requests, Selenium, Playwright</li>
                         <li><strong>Типы:</strong> АРІ-тестирование, UI-тестирование</li>
                         <li><strong>Отчетность:</strong> Allure Report</li>
-                        <li class="note"><em>(Примечание: Навыки получены в ходе обучения и самостоятельной практики)</em></li>
                     </ul>
                 </li>
                  <li>

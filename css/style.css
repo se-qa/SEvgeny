@@ -301,9 +301,7 @@ strong {
    display: inline; /* Обычное отображение */
    margin-bottom: 0;
 }
-#skills > ul > li > strong::after { /* Двоеточие после заголовка группы навыков */
-    content: ":";
-}
+
 /* --- END: Стили для "Пилюль" Навыков --- */
 
 
