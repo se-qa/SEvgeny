@@ -21,23 +21,57 @@ h1, h2, h3, h4, h5, h6 {
 .container {
     max-width: 900px;
     margin: 30px auto;
-    background-color: #fff;
-    padding: 40px; /* Увеличим внутренние отступы */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Немного изменим тень */
-    border-radius: 8px;
+    background-color: #f4f4f4; /* Фон контейнера теперь как у body */
+    padding: 0 15px; /* Небольшие отступы по бокам контейнера */
+    box-shadow: none; /* Убираем тень с контейнера */
+    border-radius: 0; /* Убираем скругление с контейнера */
+    /* overflow: hidden; Оставляем или убираем, если мешает теням карточек */
 }
+
+/* --- BEGIN: Стили для Карточек --- */
+.card {
+    background-color: #ffffff; /* Белый фон для карточки */
+    padding: 30px; /* Внутренний отступ карточки (можно настроить) */
+    margin-bottom: 25px; /* Отступ между карточками */
+    border: 1px solid #e8e8e8; /* Тонкая светлая рамка */
+    border-radius: 8px; /* Скругление углов карточки */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); /* Легкая постоянная тень */
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease; /* Плавность для ховера */
+}
+
+.card:last-child {
+    margin-bottom: 0; /* Убираем отступ у последней карточки */
+}
+
+.card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09); /* Более заметная тень при наведении */
+    transform: translateY(-4px); /* Легкий подъем */
+    border-color: #dcdcdc; /* Рамку чуть темнее */
+}
+/* --- END: Стили для Карточек --- */
 
 /* --- Header --- */
 header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    /* Убираем стили карточки, если случайно добавили */
+    background-color: #fff; /* Возвращаем белый фон header */
+    padding: 25px 30px; /* Возвращаем паддинги header */
     border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 25px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
+    margin-bottom: 25px; /* Отступ после header */
+    border-radius: 8px; /* Скругление для header */
+     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); /* Тень для header */
+     /* Добавляем transition и hover для header */
+     transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+header:hover {
+     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
+     transform: translateY(-4px);
+     border-color: #dcdcdc; /* Хотя нижней границы нет, оставляем для консистентности */
 }
 
+/* ... (стили для header остаются без изменений) ... */
 .header-left h1 {
     margin: 0 0 5px 0;
     font-size: 2.5em;
@@ -52,72 +86,114 @@ header {
 }
 
 .contact-info {
-    text-align: right;
+    /* display: flex; */ /* Убираем или заменяем */
+    /* flex-direction: column; */ /* Убираем или заменяем */
+    /* align-items: flex-end; */ /* Убираем или заменяем */
+    /* text-align: right; Убираем, т.к. будем управлять иначе */
     font-size: 0.95em;
-    min-width: 250px;
-    font-weight: 400; /* Немного увеличим вес для контактов */
+    font-weight: 400;
+    /* min-width: 250px; Можно оставить или убрать */
+    /* Выравниваем сам блок по правому краю flex-контейнера header */
+    margin-left: auto; /* <<= Добавлено: Прижимает блок контактов вправо в header */
 }
 
+/* --- Строка контакта (p) --- */
 .contact-info p {
-    margin: 6px 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    display: grid; /* Используем Grid для строки */
+    grid-template-columns: 20px 1fr; /* Колонка для иконки (ширина иконки) и колонка для текста */
+    gap: 0 10px; /* Отступ только между колонками (иконкой и текстом) */
+    align-items: center; /* Вертикальное выравнивание по центру строки */
+    margin-bottom: 8px; /* Вертикальный отступ между строками контактов */
+    /* width: max-content; */ /* Делаем строку по ширине контента */
+    /* justify-content: flex-end; Убираем, Grid управляет */
 }
+/* Убираем верхний/нижний margin по умолчанию у <p> */
+.contact-info p:first-child { margin-top: 0; }
+.contact-info p:last-child { margin-bottom: 0; }
 
+
+/* --- Иконка в строке контакта --- */
 .contact-info p i {
-    margin-right: 10px; /* Немного увеличим отступ иконки */
+    grid-column: 1 / 2; /* Явно помещаем в первую колонку */
     color: #3498db;
-    width: 20px;
-    text-align: center;
-    font-size: 1.1em; /* Сделаем иконки чуть крупнее */
+    width: 20px;       /* Фиксированная ширина */
+    text-align: center; /* Горизонтальное центрирование иконки в ее колонке */
+    font-size: 1.1em;
+    line-height: 1;     /* Нормализуем высоту строки */
+    vertical-align: middle; /* Доп. выравнивание */
+    margin-right: 0; /* Убираем, т.к. есть gap */
+    flex-shrink: 0; /* Оставляем на всякий случай */
+    justify-self: center; /* Центрируем саму иконку в ее grid-ячейке */
 }
 
-.contact-info a {
+/* --- Текст/ссылка в строке контакта --- */
+.contact-info p span,
+.contact-info p a {
+    grid-column: 2 / 3; /* Явно помещаем во вторую колонку */
+    text-align: left; /* Текст выравниваем по левому краю его колонки */
+    color: #333; /* Цвет для простого текста (если нужно) */
+    /* Стили для ссылок остаются, если нужно */
+}
+.contact-info p a {
     color: #3498db;
     text-decoration: none;
-    transition: color 0.3s ease; /* Плавный переход цвета для ссылок */
+    transition: color 0.3s ease;
 }
-
-.contact-info a:hover {
-    color: #2980b9; /* Затемнение при наведении */
+.contact-info p a:hover {
+    color: #2980b9;
     text-decoration: underline;
 }
 
+
 /* --- Секции --- */
-section {
-    margin-bottom: 35px;
-}
+/* section { margin-bottom: 35px; } Управляется теперь классом .card */
 
 section h2 {
-    font-size: 1.8em; /* Немного увеличим заголовки секций */
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 8px;
-    margin-bottom: 20px;
-    display: flex; /* Для выравнивания иконки и текста */
+    font-size: 1.8em;
+    padding-bottom: 0;
+    margin-bottom: 25px;
+    display: flex;
     align-items: center;
+    /* margin-top: 1.5em;  <-- Унаследовано от общего правила для H2 */
 }
 
+/* === ДОБАВИТЬ ЭТО ПРАВИЛО === */
+/* Убираем верхний отступ у H2 именно внутри карточки */
+.card h2 {
+    margin-top: 0; /* Устанавливаем верхний отступ в 0 */
+}
+/* ============================= */
+
+
 section h2 i {
-    margin-right: 12px; /* Отступ для иконки в заголовке секции */
+    margin-right: 12px;
     color: #3498db;
-    font-size: 0.9em; /* Размер иконки относительно заголовка */
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+section h2:hover i {
+    color: #2980b9;
 }
 
 section h3 {
     font-size: 1.4em;
     color: #333;
     margin-bottom: 8px;
+    margin-top: 1.2em; /* Добавляем отступ сверху для H3 внутри карточки */
 }
 
 section h4 {
     font-size: 1.15em;
-    color: #555;
-    margin-top: 20px;
+    color: #444;
+    margin-top: 25px;
     margin-bottom: 10px;
-    font-style: normal; /* Убираем курсив по умолчанию, делаем жирным */
+    font-style: normal;
     font-weight: 700;
-    font-family: 'Nunito Sans', sans-serif; /* Заголовки достижений - другим шрифтом */
+    font-family: 'Nunito Sans', sans-serif;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed #ddd;
+    display: inline-block;
 }
 
 /* --- Списки --- */
@@ -127,11 +203,16 @@ ul {
 }
 
 ul li {
-    margin-bottom: 10px; /* Немного увеличим отступ */
+    margin-bottom: 10px;
     padding-left: 25px;
     position: relative;
-    font-weight: 400; /* Обычное начертание для пунктов списка */
+    font-weight: 400;
+    transition: background-color 0.2s ease; /* Для hover эффекта */
 }
+/* Добавляем hover для li, если нужно (можно закомментировать, если не нравится) */
+/* ul li:hover {
+   background-color: #fcfcfc;
+} */
 
 ul li::before {
     content: '•';
@@ -139,91 +220,167 @@ ul li::before {
     font-weight: bold;
     position: absolute;
     left: 0;
-    top: -4px; /* Подстроим позицию маркера */
-    font-size: 1.2em; /* Чуть крупнее маркер */
+    top: 0; /* Обновленное позиционирование маркера */
+    font-size: 1.2em;
+    line-height: 1; /* Для лучшего контроля */
+    transition: color 0.3s ease; /* Плавность для hover */
+}
+/* Изменение маркера при наведении на li */
+ul li:hover::before {
+    color: #2980b9;
 }
 
+
 ul ul {
-    padding-left: 30px; /* Увеличим отступ вложенных списков */
+    padding-left: 30px;
     margin-top: 8px;
     margin-bottom: 12px;
 }
 
 ul ul li {
-    font-weight: 300; /* Вложенные списки снова легкие */
-    margin-bottom: 6px;
+    font-weight: 300;
+    margin-bottom: 8px; /* Чуть больше отступ для пилюль */
 }
 
 ul ul li::before {
     content: '◦';
-    color: #555;
+    color: #666; /* Чуть светлее для вложенных */
     font-weight: bold;
-    font-size: 1em; /* Обычный размер для вложенного маркера */
-    top: 1px;
+    font-size: 1em;
+    top: 1px; /* Обновленное позиционирование маркера */
+    position: absolute; /* Добавлено для консистентности */
+    left: 0; /* Добавлено для консистентности */
+    line-height: 1; /* Для лучшего контроля */
 }
 
 ul ul li.note::before {
     content: none;
 }
 
+/* Сброс стилей для основных strong (на всякий случай, если они были в HTML) */
 strong {
-    font-weight: 700; /* Используем самое жирное начертание Nunito Sans для strong */
-    color: #2c3e50; /* Темнее для выделения */
+    font-weight: 700;
+    color: #2c3e50;
+    /* Убираем стили пилюль, если они случайно применились */
+    display: inline;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border-radius: 0;
 }
+
+/* --- BEGIN: Стили для "Пилюль" Навыков --- */
+#skills ul ul strong {
+    display: inline-block; /* Чтобы можно было задать padding */
+    background-color: #eaf2f8; /* Очень светлый синий фон */
+    color: #3498db; /* Синий текст */
+    padding: 3px 10px; /* Небольшие отступы */
+    border-radius: 12px; /* Скругленные углы (пилюля) */
+    font-weight: 400; /* Можно сделать обычным, если фон уже выделяет */
+    margin-right: 6px; /* Небольшой отступ справа */
+    margin-bottom: 4px; /* Отступ снизу, если переносятся на новую строку */
+    font-size: 0.9em; /* Чуть меньше основного текста */
+    line-height: 1.5; /* Чтобы текст внутри пилюли не слипался */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавность для ховера */
+}
+#skills ul ul strong:hover {
+    background-color: #d1e3f3; /* Чуть темнее фон при наведении */
+    color: #2980b9; /* Темнее текст */
+}
+
+/* Стили для родительских strong в секции Навыки (например, "Виды тестирования:") */
+#skills > ul > li > strong {
+   background-color: transparent; /* Убираем фон пилюли */
+   padding: 0;
+   border-radius: 0;
+   color: #2c3e50; /* Возвращаем темный цвет */
+   font-weight: 700;
+   font-size: 1em;
+   margin-right: 0;
+   line-height: inherit;
+   display: inline; /* Обычное отображение */
+   margin-bottom: 0;
+}
+#skills > ul > li > strong::after { /* Двоеточие после заголовка группы навыков */
+    content: ":";
+}
+/* --- END: Стили для "Пилюль" Навыков --- */
+
 
 /* --- Опыт Работы и Образование --- */
-.job, .education-entry {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee; /* Сделаем разделитель светлее */
+/* Убираем стили карточки из .job, оставляем только специфичные для блока работы */
+.job {
+    margin-bottom: 30px; /* Отступ между блоками работы ВНУТРИ секции experience */
+    padding-bottom: 20px; /* Отступ снизу ВНУТРИ блока работы */
+    border-bottom: 1px solid #eee; /* Разделитель между блоками работы */
+    /* Убираем padding, border, background, box-shadow, hover отсюда */
 }
 
-.job:last-child, .education-entry:last-child {
+.job:last-child {
+    margin-bottom: 0; /* Убираем отступ у последнего блока работы */
+    padding-bottom: 0; /* Убираем паддинг у последнего блока работы */
+    border-bottom: none; /* Убираем разделитель у последнего блока работы */
+}
+
+/* Стили для .education-entry остаются как были, если не нужно их менять */
+.education-entry {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.education-entry:last-child {
     border-bottom: none;
     padding-bottom: 0;
     margin-bottom: 0;
 }
 
+
 .job-header {
-    margin-bottom: 5px; /* Уменьшим отступ под заголовком работы */
+    margin-bottom: 5px;
 }
 
 .job-title {
-    font-size: 1.15em; /* Немного увеличим */
-    font-weight: 700; /* Используем Merriweather 700 */
+    font-size: 1.2em; /* Немного увеличим */
+    font-weight: 700;
     color: #3498db;
-    display: block; /* Чтобы заголовок был на своей строке */
+    display: block;
     margin-bottom: 2px;
 }
 
 .company-name {
-    font-family: 'Nunito Sans', sans-serif; /* Название компании - обычным шрифтом */
+    font-family: 'Nunito Sans', sans-serif;
     font-style: normal;
     font-weight: 400;
     color: #555;
     font-size: 1em;
+    margin-bottom: 5px; /* Небольшой отступ под названием компании */
+    display: block; /* Для отступа */
 }
 
 .job-dates {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9em;
     color: #777;
-    margin-bottom: 15px; /* Увеличим отступ под датами */
+    margin-bottom: 15px;
     font-weight: 400;
 }
 
 .projects {
-    font-size: 0.95em;
-    color: #555;
-    margin-top: 15px;
-    padding-left: 20px;
-    border-left: 3px solid #eee;
-    font-weight: 400; /* Проекты - обычным весом */
+    font-size: 0.9em; /* Немного уменьшим текст проектов */
+    color: #666; /* Сделаем чуть светлее */
+    margin-top: 20px; /* Отступ сверху */
+    padding: 15px; /* Внутренний отступ */
+    border-left: none; /* Убираем левую границу */
+    border-top: 1px dashed #eee; /* Добавляем верхнюю границу для отделения */
+    background-color: #f9f9f9; /* Очень легкий фон для блока проектов */
+    border-radius: 4px; /* Небольшое скругление */
 }
 
 .projects strong {
-    color: #333; /* Выделение в проектах */
+    color: #444;
     font-weight: 700;
+    display: block; /* Заголовок на своей строке */
+    margin-bottom: 5px; /* Отступ под заголовком */
 }
 
 .note {
@@ -231,28 +388,49 @@ strong {
     color: #666;
     font-size: 0.9em;
     margin-top: 5px;
-    font-weight: 400; /* Заметки тоже обычным весом */
+    font-weight: 400;
 }
 
 /* --- Адаптивность --- */
 @media (max-width: 768px) {
     .container {
-        padding: 20px;
+        padding: 0 10px; /* Уменьшаем боковые отступы контейнера */
+        margin: 15px auto;
+    }
+
+    .card {
+        padding: 20px; /* Уменьшаем паддинг карточек */
+        margin-bottom: 20px; /* Уменьшаем отступ между карточками */
     }
 
     header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; /* Выравниваем по центру */
+        padding: 20px; /* Уменьшаем паддинги header */
+        margin-bottom: 20px; /* Уменьшаем отступ после header */
+    }
+    /* Добавляем стили для фото на мобильных, если оно будет */
+    /* .header-photo { ... } */
+
+    .header-left {
+        text-align: center; /* Выравниваем текст по центру */
+        width: 100%;
     }
 
     .contact-info {
-        text-align: left;
-        margin-top: 20px;
-        width: 100%; /* Занять всю ширину на мобильных */
+        margin-left: 0; /* Убираем прижатие вправо на мобильных */
+        width: 100%; /* Занимает всю ширину */
+        /* text-align: center; Мы это убрали, возможно нужно вернуть для p */
     }
 
     .contact-info p {
-        justify-content: flex-start;
+         /* Можно оставить grid или переключить на flex */
+         grid-template-columns: 20px auto; /* Текст займет автоширину */
+         justify-content: center; /* Центрируем строку на мобильных */
+         width: auto; /* Убираем max-content */
+         display: inline-grid; /* Чтобы строка не растягивалась на всю ширину */
+         margin-left: auto; /* Центрируем */
+         margin-right: auto; /* Центрируем */
     }
 
     section h2 {
@@ -266,30 +444,31 @@ strong {
     .header-left h2 {
         font-size: 1.3em;
     }
+
+    /* Уменьшаем отступы карточек на мобильных */
+    .job {
+        padding: 15px;
+    }
 }
 
 /* --- Стили для Анимации при Прокрутке --- */
-
-/* Начальное состояние элементов (скрыты и сдвинуты) */
 .animate-on-scroll {
     opacity: 0;
-    transform: translateY(30px); /* Сдвигаем немного вниз */
+    transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform; /* Подсказка браузеру для оптимизации */
+    will-change: opacity, transform;
 }
 
-/* Конечное состояние элементов (видимы и на своем месте) */
 .animate-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Опционально: небольшая задержка для элементов опыта работы */
 #experience .job.animate-on-scroll {
     transition-delay: 0.1s;
 }
 
-#experience .job.animate-on-scroll:nth-child(odd) { /* Можно добавить еще вариативности */
+#experience .job.animate-on-scroll:nth-child(even) { /* Чередуем задержку для разнообразия */
     transition-delay: 0.2s;
 }
 
