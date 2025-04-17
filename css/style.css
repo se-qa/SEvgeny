@@ -220,7 +220,7 @@ ul li::before {
     font-weight: bold;
     position: absolute;
     left: 0;
-    top: 0; /* Обновленное позиционирование маркера */
+    top: 3px; /* Обновленное позиционирование маркера */
     font-size: 1.2em;
     line-height: 1; /* Для лучшего контроля */
     transition: color 0.3s ease; /* Плавность для hover */
@@ -247,7 +247,7 @@ ul ul li::before {
     color: #666; /* Чуть светлее для вложенных */
     font-weight: bold;
     font-size: 1em;
-    top: 1px; /* Обновленное позиционирование маркера */
+    top: 6px; /* Обновленное позиционирование маркера */
     position: absolute; /* Добавлено для консистентности */
     left: 0; /* Добавлено для консистентности */
     line-height: 1; /* Для лучшего контроля */
